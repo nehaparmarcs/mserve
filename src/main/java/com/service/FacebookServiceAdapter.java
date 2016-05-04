@@ -1,5 +1,6 @@
 package com.service;
 
+import java.net.URLDecoder;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
@@ -152,11 +153,11 @@ public class FacebookServiceAdapter {
 				@SuppressWarnings("deprecation")
 				DB db = mongoClient.getDB("ibm");
 				DBCollection table = db.getCollection("fbeventdata");
-	
+				
 				BasicDBObject regexQuery = new BasicDBObject();
 				//Pattern searchTxt = Pattern.compile(searchText, Pattern.CASE_INSENSITIVE);
 				  regexQuery.put("description",
-					new BasicDBObject("$regex", searchText));
+					new BasicDBObject("$regex", URLDecoder.decode(searchText,"UTF-8")));
 			                    //.append("$options", "m"));
 
 				  System.out.println(regexQuery.toString());
